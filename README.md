@@ -1,6 +1,6 @@
 # FPGA Stopwatch System
 
-FPGA Stopwatch System is a SystemVerilog digital-design project for a four-digit stopwatch implemented through an FPGA-oriented workflow. The design combines cascaded digit counters, BCD-style digit handling, seven-segment display multiplexing, Quartus project configuration, and ModelSim simulation scripts.
+FPGA Stopwatch System is a SystemVerilog digital-design project for a four-digit stopwatch implemented through an FPGA-oriented workflow. This design is a combination of cascaded digit counters, BCD style digit handling, seven segment display multiplexing, Quartus project configuration and ModelSim simulation scripts.
 
 ## Preview
 
@@ -14,7 +14,7 @@ The cascade rollover view focuses on the moment where `Q1` rolls over and advanc
 
 ![Counter9 simulation](public/images/projects/fpga-stopwatch-system/fpga-stopwatch-counter9-simulation.png)
 
-The Counter9 waveform follows the course testbench behavior: reset starts high, then the counter increments through the 0-9 digit range and rolls over.
+The Counter9 waveform follows the testbench behavior: reset starts high, then the counter increments through the 0-9 digit range and rolls over.
 
 ![Counter5 simulation](public/images/projects/fpga-stopwatch-system/fpga-stopwatch-counter5-simulation.png)
 
@@ -33,11 +33,8 @@ The BCD waveform follows the original BCD testbench input sequence and shows the
 * SystemVerilog implementation of an FPGA stopwatch
 * Cascaded 0-9 and 0-5 digit counters
 * Counter rollover propagation between digit positions
-* Binary-to-BCD helper module
 * Four-digit seven-segment display multiplexing
-* Quartus project configuration
 * ModelSim `.do` scripts for simulation
-* Module-level testbenches for the BCD, counter, and stopwatch logic
 
 ## Technical Overview
 
@@ -53,9 +50,9 @@ The modular source files are under:
 source_modules/
 ```
 
-The stopwatch connects four digit counters in sequence. The first and third digits use `Counter9`, while the second and fourth digits use `Counter5`. Each counter's rollover behavior provides the timing event for the next digit, allowing the displayed stopwatch value to advance across multiple digit positions.
+The stopwatch has four cascaded digit counters. `Counter9` is used for the first and third digits, `Counter5` is used for the second and fourth digits. The rollover behavior of each counter provides the timing event for the next digit, so the stopwatch display can roll over multiple digit positions.
 
-The display logic uses `clkdiv` and `disp_hex_mux`. The clock divider produces slower timing behavior, while the display multiplexer selects one of four digit values and maps the selected value to the `sseg` seven-segment output pattern. The project also includes `BinBCD`, which converts a 4-bit binary value into ones and tens digits.
+Display logic uses `clkdiv` and `disp_hex_mux`. The clock divider slows the timing. The display multiplexer selects one of four digit values and maps the selected value to the `sseg` seven segment output pattern. The project also has `BinBCD` which converts a 4-bit binary value into ones and tens digits.
 
 ## How to Run / Review
 
@@ -82,4 +79,4 @@ source_modules/BCD/
 
 ## Limitations
 
-This is a course-level FPGA/SystemVerilog implementation. It is best presented as a digital-design project focused on counters, BCD conversion, display multiplexing, source organization, and FPGA workflow rather than as a fully polished commercial hardware product.
+This is a simple implementation of a stopwatch, and it demonstrates the basic concepts of digital design like counters, rollover, BCD conversion and driving a seven segment display.
